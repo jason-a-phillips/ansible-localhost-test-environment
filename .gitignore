@@ -1,0 +1,9 @@
+
+# ignore the authorized keys file
+docker/authorized_keys
+
+# ignore my notes
+docker/readme.md
+
+
+

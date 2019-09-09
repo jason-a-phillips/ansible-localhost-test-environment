@@ -1,0 +1,29 @@
+
+- name: Build Docker image for Ansible managed host containers
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Remove Ansible managed host Docker image
+      block:
+        - name: Remove Ansible managed host Docker image
+          command: docker rmi ansible-host
+          register: command_result
+        - debug:
+            msg: The Ansible managed host image was removed.
+        - debug:
+            msg: "SUCCESS: {{ command_result }}"
+      rescue:
+        - debug:
+            msg: "ERROR: {{ command_result }}"
+
+    - name: Build the Ansible managed host image
+      block:
+        - name: Build the Ansible managed host image
+          command: docker build -t ansible-host ../containers
+        - debug:
+            msg: The Ansible managed host image was built successfully.
+        - debug:
+            msg: "SUCCESS: {{ command_result }}"
+      rescue:
+        - debug:
+            msg: "ERROR: {{ command_result }}"

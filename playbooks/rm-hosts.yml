@@ -1,0 +1,36 @@
+
+- name: Spin down managed hosts
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Stop Docker Ansible containers
+      block:
+        - name: Stop Docker containers
+          command: docker stop {{ item }}
+          register: command_result
+          with_items:
+            - ansible-host-1
+            - ansible-host-2
+            - ansible-host-3
+            - ansible-host-4
+        - debug:
+            msg: The containers were stopped corectly.
+      rescue:
+        - debug:
+            msg: "ERROR: {{ command_result }}"
+
+    - name: Remove Docker Ansible containers
+      block:
+        - name: Remove Docker containers
+          command: docker rm {{ item }}
+          register: command_result
+          with_items:
+            - ansible-host-1
+            - ansible-host-2
+            - ansible-host-3
+            - ansible-host-4
+        - debug:
+            msg: The containers were removed corectly.
+      rescue:
+        - debug:
+            msg: "ERROR: {{ command_result }}"
