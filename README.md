@@ -63,7 +63,7 @@ Next we are ready to build the image for the manged host containers. In the `pla
 ansible-playbook build-host.yml
 ```
 
-This will build the managed hosts' Docker containers. Alternatively, you could build the image with the Docker command in the `docker/` folder:
+This will build the managed hosts' Docker image. Alternatively, you could build the image with the `docker build` command in the `docker/` folder where the Dockerfile is located:
 
 ```bash
 docker build -t ansible-host .
