@@ -1,9 +1,15 @@
-# docker build -t ansible-host .
-# docker run -p 22:22 --name ansible-host-1 -it -d ansible-host
-# docker exec -it ansible-host-1 bash
-# https://hub.docker.com/r/rastasheep/ubuntu-sshd/dockerfile
-FROM ubuntu:18.04
+############################################################
+## Manual commands:
+############################################################
+## docker build -t ansible-host .
+## docker run -p 22:22 --name ansible-host-1 -it -d ansible-host
+## docker exec -it ansible-host-1 bash
+############################################################
+## Originally from: 
+## https://hub.docker.com/r/rastasheep/ubuntu-sshd/dockerfile
+############################################################
 
+FROM ubuntu:18.04
 USER root
 
 RUN apt-get update && \ 
