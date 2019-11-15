@@ -1,6 +1,5 @@
 ############################################################
 ## Manual commands:
-############################################################
 ## docker build -t ansible-host .
 ## docker run -p 22:22 --name ansible-host-1 -it -d ansible-host
 ## docker exec -it ansible-host-1 bash
