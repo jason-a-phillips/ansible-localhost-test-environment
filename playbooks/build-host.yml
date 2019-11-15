@@ -19,7 +19,7 @@
     - name: Build the Ansible managed host image
       block:
         - name: Build the Ansible managed host image
-          command: docker build -t ansible-host ../containers
+          command: docker build -t ansible-host ../docker
         - debug:
             msg: The Ansible managed host image was built successfully.
         - debug:
