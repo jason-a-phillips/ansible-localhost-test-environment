@@ -5,9 +5,11 @@
 FROM ubuntu:18.04
 
 USER root
+
 RUN apt-get update && \ 
-    apt-get install -y openssh-server vim && \
-    useradd -m -s /bin/bash ansible-user && \
+    apt-get install -y openssh-server vim
+
+RUN useradd -m -s /bin/bash ansible-user && \
     # echo 'ansible-user:yourpasswordgoeshere' | chpasswd && \ ### We technically should not need a password for this account
     mkdir /var/run/sshd && \
     echo 'AllowUsers ansible-user' >> /etc/ssh/sshd_config
