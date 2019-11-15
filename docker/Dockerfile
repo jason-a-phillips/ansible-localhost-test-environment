@@ -10,10 +10,6 @@ RUN apt-get update && \
     useradd -m -s /bin/bash ansible-user && \
     # echo 'ansible-user:yourpasswordgoeshere' | chpasswd && \ ### We technically should not need a password for this account
     mkdir /var/run/sshd && \
-    sed -ri 's/^#?UsePAM\s+.*/UsePAM no/' /etc/ssh/sshd_config && \
-    sed -ri 's/^#?ChallengeResponseAuthentication\s+.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config && \
-    sed -ri 's/^#?PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config && \
-    sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin no/' /etc/ssh/sshd_config && \
     echo 'AllowUsers ansible-user' >> /etc/ssh/sshd_config
 
 ADD authorized_keys /home/ansible-user/.ssh/authorized_keys

@@ -34,3 +34,21 @@
       rescue:
         - debug:
             msg: "ERROR: {{ command_result }}"
+
+    - name: Remove keys from known_hosts
+      block:
+        - name: Remove keys from known_hosts, if they exist
+          register: command_result
+          command: ssh-keygen -f '~/.ssh/known_hosts' -R {{ item }}
+          with_items:
+            - 172.17.0.2
+            - 172.17.0.3
+            - 172.17.0.4
+            - 172.17.0.5
+        - debug:
+            msg: The known_hosts file was cleansed successfully
+
+      rescue:
+        - debug:
+            msg: "ERROR: {{ command_result }}"
+

@@ -7,20 +7,18 @@
       block:
         - name: Remove keys from known_hosts, if they exist
           register: command_result
-          command: ssh-keygen -f '/home/ansible-user/.ssh/known_hosts' -R {{ item }}
+          command: ssh-keygen -f '~/.ssh/known_hosts' -R {{ item }}
           with_items:
-            - ansible-host-1
-            - ansible-host-2
-            - ansible-host-3
-            - ansible-host-4
+            - 172.17.0.2
+            - 172.17.0.3
+            - 172.17.0.4
+            - 172.17.0.5
         - debug:
             msg: The known_hosts file was cleansed successfully
 
       rescue:
         - debug:
             msg: "ERROR: {{ command_result }}"
-        - debug:
-            msg: "SUCCESS: {{ command_result }}"
 
 
     - name: Spin up managed hosts
@@ -42,21 +40,20 @@
         - debug:
             msg: "SUCCESS: {{ command_result }}"
 
-
     - name: Add managed host containers keys to known_hosts
       block:
         - name: Add managed host containers keys to known_hosts
           register: command_result
-          command: ssh-keyscan -H {{ item }} >> ~/.ssh/known_hosts
+          local_action: shell ssh-keyscan {{ item }} >> ~/.ssh/known_hosts
           with_items:
-            - ansible-host-1
-            - ansible-host-2
-            - ansible-host-3
-            - ansible-host-4
+            - 172.17.0.2
+            - 172.17.0.3
+            - 172.17.0.4
+            - 172.17.0.5
         - debug:
             msg: The keys were added to known_hosts correctly.
-        - debug:
-            msg: "SUCCESS: {{ command_result }}"
+        # - debug:
+        #     msg: "SUCCESS: {{ command_result }}"
 
       rescue:
         - debug:

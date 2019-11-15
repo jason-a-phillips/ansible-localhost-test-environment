@@ -10,11 +10,9 @@
           register: command_result
         - debug:
             msg: The Ansible managed host image was removed.
-        - debug:
-            msg: "SUCCESS: {{ command_result }}"
       rescue:
         - debug:
-            msg: "ERROR: {{ command_result }}"
+            msg: The Ansible managed host image did not exist.
 
     - name: Build the Ansible managed host image
       block:
